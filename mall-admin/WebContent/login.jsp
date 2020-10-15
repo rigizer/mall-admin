@@ -48,13 +48,13 @@
 					<tr>
 						<td>관리자 ID: </td>
 						<td>
-							<input type="text" class="form-control" name="adminId">
+							<input type="text" class="form-control" name="adminId" placeholder="아이디" onclick="this.value='admin'">
 						</td>
 					</tr>
 					<tr>
 						<td>관리자 PW: </td>
 						<td>
-							<input type="password" class="form-control" name="adminPw">
+							<input type="password" class="form-control" name="adminPw" placeholder="비밀번호" onclick="this.value='1234'">
 						</td>
 					</tr>
 					<tr>
