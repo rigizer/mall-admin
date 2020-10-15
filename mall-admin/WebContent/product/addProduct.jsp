@@ -30,6 +30,28 @@
 		
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		<!-- jQuery를 이용하여 Form 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$("#btn").click(function() {	// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+					if ($("#categoryId").val() == "") {	// categoryId 미선택시 수행
+						alert("카테고리를 선택해주세요");
+						return;
+					} else if ($("#productName").val() == "") {	// productName 공백인 경우 수행
+						alert("상품명을 입력해주세요");
+						return;
+					} else if ($("#productPrice").val() == "") {	// productPrice 공백인 경우 수행
+						alert("상품 가격을 입력해주세요");
+						return;
+					} else if ($("#productContent").val() == "") {	// productContent 공백인 경우 수행
+						alert("상품 설명을 입력해주세요");
+						return;
+					}
+					$("#addForm").submit();
+				});	
+			});
+		</script>
 	</head>
 	<body>
 		<%
@@ -51,12 +73,12 @@
 			<br>
 			
 			<div>
-				<form method="post" action="<%=request.getContextPath() %>/product/addProductAction.jsp">
+				<form method="post" action="<%=request.getContextPath() %>/product/addProductAction.jsp" id="addForm">
 					<table class="table table-striped" style="text-align: center">
 						<tr>
 							<td>카테고리</td>
 							<td>
-								<select name="categoryId" class="form-control">
+								<select name="categoryId" class="form-control" id="categoryId">
 									<option value="">==== 카테고리 선택 ====</option>
 									<%
 										for (Category c : categoryList) {
@@ -68,16 +90,16 @@
 						</tr>
 						<tr>
 							<td>상품명</td>
-							<td><input type="text" class="form-control" name="productName"></td>
+							<td><input type="text" class="form-control" name="productName" id="productName"></td>
 						</tr>
 						<tr>
 							<td>상품 가격</td>
-							<td><input type="text" class="form-control" name="productPrice"></td>
+							<td><input type="text" class="form-control" name="productPrice" id="productPrice"></td>
 						</tr>
 						<tr>
 							<td>상품 설명</td>
 							<td>
-								<textarea class="form-control" rows="10" cols="40" name="productContent"></textarea>
+								<textarea class="form-control" rows="10" cols="40" name="productContent" id="productContent"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -93,7 +115,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<button type="submit" class="btn btn-dark">상품 추가</button>
+								<button type="button" class="btn btn-dark" id="btn">상품 추가</button>
 							</td>
 						</tr>
 					</table>

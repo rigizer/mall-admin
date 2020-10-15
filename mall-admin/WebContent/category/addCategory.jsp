@@ -26,6 +26,19 @@
 		
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		<!-- jQuery를 이용하여 Form 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$("#btn").click(function() {	// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+					if ($("#categoryName").val() == "") {	// categoryName 공백인 경우 수행
+						alert("카테고리 이름을 입력해주세요");
+						return;
+					}
+					$("#addForm").submit();
+				});	
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -42,15 +55,15 @@
 			<br>
 			
 			<div>
-				<form method="post" action="<%=request.getContextPath() %>/category/addCategoryAction.jsp">
+				<form method="post" action="<%=request.getContextPath() %>/category/addCategoryAction.jsp" id="addForm">
 					<table class="table table-striped" style="text-align: center">
 						<tr>
 							<td>카테고리 이름</td>
 							<td>
-								<input type="text" class="form-control" name="categoryName">
+								<input type="text" class="form-control" name="categoryName" id="categoryName">
 							</td>
 							<td>
-								<button type="submit" class="btn btn-dark">카테고리 추가</button>
+								<button type="button" class="btn btn-dark" id="btn">카테고리 추가</button>
 							</td>
 						</tr>
 					</table>

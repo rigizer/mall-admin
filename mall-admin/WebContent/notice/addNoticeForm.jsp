@@ -28,6 +28,22 @@
 		
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		
+		<!-- jQuery를 이용하여 Form 유효성 검사 -->
+		<script>
+			$(document).ready(function() {	// 문서가 로드되면 이 스크립트를 제일 마지막에 실행해주세요
+				$("#btn").click(function() {	// 버튼 클릭시 폼 내용의 유효성 검사를 수행
+					if ($("#noticeTitle").val() == "") {	// noticeTitle 공백인 경우 수행
+						alert("제목을 입력해주세요");
+						return;
+					} else if ($("#noticeContent").val() == "") {	// noticeContent 공백인 경우 수행
+						alert("내용을 입력해주세요");
+						return;
+					}
+					$("#addForm").submit();
+				});	
+			});
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -45,23 +61,23 @@
 			<br>
 			
 			<div>
-				<form method="post" action="<%=request.getContextPath() %>/notice/addNoticeAction.jsp">
+				<form method="post" action="<%=request.getContextPath() %>/notice/addNoticeAction.jsp" id="addForm">
 					<table class="table table-striped" style="text-align: center">
 						<tr>
 							<td>제목</td>
 							<td>
-								<input type="text" class="form-control" name="noticeTitle">
+								<input type="text" class="form-control" name="noticeTitle" id="noticeTitle">
 							</td>
 						</tr>
 						<tr>
 							<td>내용</td>
 							<td>
-								<textarea class="form-control" rows="10" cols="40" name="noticeContent"></textarea>
+								<textarea class="form-control" rows="10" cols="40" name="noticeContent" id="noticeContent"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2">
-								<button type="submit" class="btn btn-dark">등록</button>
+								<button type="button" class="btn btn-dark" id="btn">등록</button>
 							</td>
 						</tr>
 					</table>
